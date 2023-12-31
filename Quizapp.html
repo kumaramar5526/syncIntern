@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        #quiz-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #question {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .option {
+            margin: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        #score {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+
+        #score img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="quiz-container">
+        <h1>Quiz App</h1>
+        <div id="question"></div>
+        <div class="options" id="options"></div>
+        <div id="result"></div>
+        <div id="score"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "What is the capital of France?",
+                options: ["Paris", "Berlin", "London", "Madrid"],
+                correctAnswer: "Paris"
+            },
+            {
+                question: "Which programming language is this quiz written in?",
+                options: ["Java", "Python", "JavaScript", "C++"],
+                correctAnswer: "JavaScript"
+            },
+            // Add more quiz questions as needed
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const questionElement = document.getElementById("question");
+            const optionsElement = document.getElementById("options");
+
+            questionElement.textContent = quizData[currentQuestion].question;
+            optionsElement.innerHTML = "";
+
+            for (let i = 0; i < quizData[currentQuestion].options.length; i++) {
+                const option = document.createElement("button");
+                option.className = "option";
+                option.textContent = quizData[currentQuestion].options[i];
+                option.addEventListener("click", () => checkAnswer(quizData[currentQuestion].options[i]));
+                optionsElement.appendChild(option);
+            }
+        }
+
+        function checkAnswer(selectedOption) {
+            const resultElement = document.getElementById("result");
+            const scoreElement = document.getElementById("score");
+
+            if (selectedOption === quizData[currentQuestion].correctAnswer) {
+                resultElement.textContent = "Correct!";
+                score++;
+            } else {
+                resultElement.textContent = "Wrong!";
+            }
+
+            currentQuestion++;
+
+            if (currentQuestion < quizData.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            const scoreElement = document.getElementById("score");
+
+            scoreElement.innerHTML = `<p>Your Score: ${score}/${quizData.length}</p>`;
+
+            if (score >= quizData.length / 2) {
+                scoreElement.innerHTML += '<img src="winner.gif" alt="Winner">';
+            } else {
+                scoreElement.innerHTML += '<img src="loser.gif" alt="Loser">';
+            }
+        }
+
+        // Initial load
+        loadQuestion();
+    </script>
+
+</body>
+</html>

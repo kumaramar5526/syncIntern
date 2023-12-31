@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>E-Learning Website</h1>
+    </header>
+
+    <section>
+        <div class="feature" id="signupFeature">
+            <h2>Feature 1: Signing up online</h2>
+            <form id="signupForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+
+        <div class="feature" id="documentUploadFeature">
+            <h2>Feature 2: Facility of uploading documents online</h2>
+            <input type="file" id="documentUpload" accept=".pdf, .doc, .docx">
+            <button id="uploadButton">Upload Document</button>
+            <div id="uploadedDocuments"></div>
+        </div>
+        
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Your E-Learning Website. All rights reserved.</p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
